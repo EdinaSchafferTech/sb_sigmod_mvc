@@ -25,12 +25,12 @@ public class XmlReader {
 		try {
 			File file = new File(path);
 
-			if (!file.exists()) {
+			if (!file.exists()|| !file.isFile()) {
 				return authorMap;
 			}
 
 			SAXBuilder sb = new SAXBuilder();
-			Document doc = sb.build(new File(path));
+			Document doc = sb.build(file);
 			Element rootElement = doc.getRootElement();
 			Namespace ns = rootElement.getNamespace();
 
@@ -75,6 +75,7 @@ public class XmlReader {
 				}
 			}
 		} catch (Exception e) {
+			 e.printStackTrace();
 
 		}
 

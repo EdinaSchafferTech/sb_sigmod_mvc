@@ -61,18 +61,19 @@ public class AppService {
 	}
 
 	public List<AuthorDTO> getAuthorsFromDatabase(String search) {
+
 		List<AuthorDTO> authorDTOList = new ArrayList<>();
 
 		List<Author> authors = repository.findByNameContainingIgnoreCase(search);
-		System.out.println(authors.size());
 
 		if (!authors.isEmpty()) {
+
 			for (Author author : authors) {
+
 				AuthorDTO authorDTO = new AuthorDTO(author.getName(), author.getCounter());
+
 				authorDTOList.add(authorDTO);
 			}
-		} else {
-			// nincs adat
 		}
 
 		return authorDTOList;

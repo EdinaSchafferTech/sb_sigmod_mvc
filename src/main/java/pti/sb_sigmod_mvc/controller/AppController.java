@@ -64,6 +64,11 @@ public class AppController {
 	@GetMapping("/read-database")
 	public String readDatabase(Model model) {
 		List<AuthorDTO> authors = service.getAuthorsFromDatabase("");
+
+		if (authors.isEmpty()) {
+			model.addAttribute("error", "The database is empty.");
+			return "authors.html";
+		}
 		model.addAttribute("authors", authors);
 		model.addAttribute("source", "database");
 
@@ -74,6 +79,11 @@ public class AppController {
 	public String readXml(@RequestParam String path, Model model) {
 
 		List<AuthorDTO> authors = service.getAuthors(path, "");
+
+		if (authors.isEmpty()) {
+			model.addAttribute("error", "The XML file could not be read.");
+			return "authors.html";
+		}
 		model.addAttribute("authors", authors);
 		model.addAttribute("source", "xml");
 		model.addAttribute("path", path);

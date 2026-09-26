@@ -9,8 +9,7 @@ import pti.sb_sigmod_mvc.model.Author;
 
 public interface AuthorRepository extends CrudRepository<Author, Integer> {
 	
-	@Query("SELECT * FROM authors WHERE name LIKE :name")
-	
+	@Query("SELECT * FROM authors WHERE LOWER(name) LIKE LOWER(CONCAT('%', :name, '%'))")
 	List<Author> findByNameContainingIgnoreCase(String name);
 
 }
