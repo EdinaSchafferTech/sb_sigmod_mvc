@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.loc.gov/MARC21/slim">
+<head>
+<meta charset="UTF-8">
+<title>Authors</title>
+</head>
+<body>
+
+<h1>Authors</h1>
+
+<h2>Choose data source</h2>
+
+<form action="/read-database" method="get">
+    <button type="submit">Search from database</button>
+</form>
+
+<form action="/read-xml" method="post">
+    <input type="text" name="path">
+    <button type="submit">Search from XML</button>
+</form>
+
+<div th:if="${source != null}">
+
+    <form action="/authors" method="get">
+        <input type="hidden" name="source" th:value="${source}">
+        <input type="hidden" name="path" th:value="${path}">
+        <input type="text" name="search">
+        <button type="submit">Search</button>
+    </form>
+
+
+<form action="/authors" method="get">
+    <input type="hidden" name="source" th:value="${source}">
+    <input type="hidden" name="path" th:value="${path}">
+    
+    <input type="text" name="search">
+    <button type="submit">Search</button>
+</form>
+
+
+<form action="/export" method="get">
+    <select name="type">
+        <option value="database">Database</option>
+        <option value="xml">XML File</option>
+    </select>
+
+    <button type="submit">EXPORT</button>
+</form>
+
+<table border="1">
+
+<tr>
+
+<th>Author</th>
+<th>Count</th>
+
+</tr>
+
+<tr th:each="author : ${authors}">
+
+	<td th:text="${author.name}"></td>
+	<td th:text="${author.counter}"></td>
+
+</tr>
+
+
+</table>
+
+</div>
+
+
+
+</body>
+</html>
